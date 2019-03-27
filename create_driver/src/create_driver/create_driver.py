@@ -125,19 +125,7 @@ REMOTE_OPCODES = {
     255: 'none',
     }
 
-BAUD_RATES = (  # In bits per second.
-    300,
-    600,
-    1200,
-    2400,
-    4800,
-    9600,
-    14400,
-    19200,
-    28800,
-    38400,
-    57600,  # Default.
-    115200)
+BAUD_RATES = (115200)
 
 CHARGING_STATES = (
     'not-charging',
@@ -209,7 +197,7 @@ class SerialCommandInterface(object):
 
   """
   def __init__(self, tty, baudrate):
-    self.ser = serial.Serial(tty, baudrate=baudrate, timeout=SERIAL_TIMEOUT)
+    self.ser = serial.Serial(tty, baudrate=115200, timeout=SERIAL_TIMEOUT)
     self.wake()
     self.opcodes = {}
 
@@ -281,7 +269,7 @@ class Roomba(object):
     self.sci = None
     self.safe = True
 
-  def start(self, tty='/dev/ttyUSB0', baudrate=57600):
+  def start(self, tty='/dev/ttyUSB0', baudrate=115200):
     self.tty = tty
     self.sci = SerialCommandInterface(tty, baudrate)
     self.sci.add_opcodes(ROOMBA_OPCODES)
